@@ -1,10 +1,10 @@
 # client
 
-## 功能：
+##  功能：
 
 **src实现了一个接入libra的client,他能够用于连接特定的validator**，libra—wallet部分实现了一个钱包，我们暂时不准备看这一部分
 
-## 代码：
+##  代码：
 
 #### main.rs:用命令行创建了一个client（可以指定config），并连接到validator，CLI commands 是在client_proxy.rs中实现的，这些命令实现起来都比较短，函数名称能反映其功能。
 
