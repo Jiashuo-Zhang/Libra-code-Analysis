@@ -1,4 +1,8 @@
-# libra code analysis
+# Libra-code-Analysis
+
+## 背景：
+
+Libra是Facebook
 
 ## 目录：
 
@@ -47,15 +51,11 @@
   * client_proxy
   * grpc_client
 
-## 说明：
-
-目前上传的只有核心部分的代码，2019.09.07前会完成更新
-
 ## 参考资料：
 
 * Libra 源码：<https://github.com/libra/libra>
 
-* Libra 官网：<https://developers.libra.org/>
+* Libra 开发者官网：<https://developers.libra.org/>
 
   
 
