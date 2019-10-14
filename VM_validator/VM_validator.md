@@ -2,16 +2,16 @@
 
 ## 功能：
 
-**提供一个对交易进行验证的服务，判断其是否合法值得注意的是这一部分并没有实现最终的validate_transactions的服务，只是简单的进行了包装，具体的逻辑还是在VM中实现，具体实现中，VM会有输入一个相应的state_view（包含账户信息等）和一个txn，会通过这两个进行判断**
+**提供一个对交易进行验证的服务，判断其是否合法值得注意的是这一部分并没有实现validate_transactions的逻辑，只是简单的进行了包装，调用MoveVM的一个函数（vm.validate_transaction)实现的，具体实现中，会有输入一个相应的state_view（包含账户信息等）和一个txn，通过这两个参数进行判断。**
 
 ## 模块：
 
 * 主要功能在vm_validator.rs 中实现
-* mock_vm_validator模块模拟了VMvalidator，相对于vm_validator中的实现增加了一些检查（比如检查数字签名等）没有什么特别的用途，不用管
 
 ## 与其他模块的交互
 
-**AC会生成他的VM_validator的instance**
+* AC会生成VM_validator的instance
+* 会与storage和VM模块进行交互
 
 ## 代码：
 
@@ -29,11 +29,12 @@ pub trait TransactionValidation: Send + Sync {
 }
 
 #[derive(Clone)]
+//结构体中有一个读storage的client，一个用于验证的虚拟机
 pub struct VMValidator {
     storage_read_client: Arc<dyn StorageRead>,////包含一个storage client，来获得相应账户的sequence，balance等信息
     vm: MoveVM,
 }
-//结构体中有一个读storage的client，一个用于验证的虚拟机
+
 impl VMValidator {
     pub fn new(config: &NodeConfig, storage_read_client: Arc<dyn StorageRead>) -> Self {
         VMValidator {
@@ -45,7 +46,7 @@ impl VMValidator {
 
 ```
 
-####VMvalidator实现transactionvalidation接口
+#### VMvalidator实现transactionvalidation接口
 
 ```rust
 impl TransactionValidation for VMValidator {
@@ -135,7 +136,9 @@ pub async fn get_account_state(
 }
 ```
 
+## 总结： 
 
+**这一部分体现了封装的基本思想。这一部分起到的作用就是通过底层的查询account状态的函数，组装出相关参数，然后调用VM中实现的函数，最终完成调用功能**
 
 
 

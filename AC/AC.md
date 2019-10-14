@@ -18,25 +18,25 @@
 ## 功能：
 
 * AC是validator与外界交互的唯一接口
-* 在收到查询状态、同步到最新ledger请求时，会将请求直接转发给validator的storage模块，AC并不会直接处理这些请求
-* 在收到submit transaction请求时会先验证这一请求的合法性（包括数字签名，账户余额等），如果不合法，返回错误(这些验证一部分是在AC进行，另一部分则通过VM进行；如果合法，则提交到validator的mempool模块内存储到池中等待组合成区块
+* 在收到client发来的查询状态、同步到最新ledger等请求时，AC会将请求直接转发给validator的storage模块，而不是直接处理这些请求。
+* 在收到submit transaction请求时，先验证这一请求的合法性（包括数字签名，账户余额等），如果不合法，返回错误(这些验证一部分是在AC进行，另一部分则通过VM进行）；如果合法，则将transaction提交到validator的mempool模块内存储到池中等待组合成区块
 
 ## 与其他模块的交互：
 
 **Mempool ，Storage，VM_validator**
 
-前两者是通过调用gRPC服务的形式，VM_validator 是通过直接生成一个validator实例来做的
+前两者是通过调用gRPC服务的形式，VM_validator 是通过直接生成一个validator实例来实现的
 
 
 
 ## 代码实现：
 
-###admission_control_service.rs:
+### admission_control_service.rs:
 
-####定义：
+#### 定义：
 
 ```rust
-//从这个定义可以看到ACservice实际上是通过与其他模块的交互实现的，包括两个grpc client和一个VM_validator实例
+//从这个定义可以看到ACservice实际上是通过与其他模块的交互实现的，其包括两个grpc client和一个VM_validator实例
 pub struct AdmissionControlService<M, V> {
     /// gRPC client connecting Mempool.
     mempool_client: Arc<M>,
@@ -50,7 +50,7 @@ pub struct AdmissionControlService<M, V> {
 }
 ```
 
-###下面是对于这个struct的impl：
+### 下面是对于这个struct的接口实现：
 
 #### submit_transaction_inner：
 
@@ -121,7 +121,7 @@ pub(crate) fn submit_transaction_inner(
         
         //验证成功
         let sender = signed_txn.sender();
-        let account_state = block_on(get_account_state(self.storage_read_client.clone(), sender));/////通过self的storage grpc client来获取状态。
+        let account_state = block_on(get_account_state(self.storage_read_client.clone(), sender));/////通过self的storage grpc client来获取账户状态。
         let mut add_transaction_request = AddTransactionWithValidationRequest::new();
         add_transaction_request.signed_txn = req.signed_txn.clone();
         add_transaction_request.set_max_gas_cost(gas_cost);
@@ -159,7 +159,7 @@ fn update_to_latest_ledger_inner(
     }
 ```
 
-####impl 一个接口：
+#### impl 一个接口：
 
 #### submit_transaction & update_to_latest_ledger
 
@@ -207,7 +207,9 @@ where
 
 ```
 
+## 总结：
 
+**看完AC部分的基本代码后，我们已经知道了client submit的transaction是怎样通过验证并加入到validator的mempool中等待组装成块的，也知道了client的query操作是如何与validator的storage建立关系的**
 
 
 
