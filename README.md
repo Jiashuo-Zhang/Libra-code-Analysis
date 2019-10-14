@@ -1,11 +1,10 @@
 # Libra-code-Analysis
 
-## 背景：
-
-Libra是Facebook
+**这个项目旨在帮助研究者们理解Libra的基础结构和了解Rust语言。我们分别描述了The Libra Blockchain的核心组成部分，并聚焦于他们是如何相互联系，组成一个具有完整功能的系统。我们在现有官方文档的基础上，关注于最为核心的框架，自顶向下地逐步深入，并最终完成代码实现层面的分析。同时，对一些繁琐晦涩的部分，我们只关心他们的作用与实现方法，而不深究其具体实现。我们希望这个项目能为希望了解Libra底层实现的研究者们提供帮助，同时填补Libra 代码分析这一领域的空白。**
 
 ## 目录：
 
+* **[Overview](https://developers.libra.org/docs/life-of-a-transaction)**
 * **[AC](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/AC/AC.md)**
 * **[VM_validator](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/VM_validator/VM_validator.md)**
 * **[Mempool](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/tree/master/mempool)**
