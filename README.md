@@ -8,10 +8,6 @@
 
 ## 目录：
 
-<<<<<<< HEAD
-* **Overview**
-=======
->>>>>>> 353e25a5b71499ad76d7cde5d5f43fcbfe89c61a
 * **[AC](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/AC/AC.md)**
 * **[VM_validator](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/VM_validator/VM_validator.md)**
 * **[Mempool](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/tree/master/mempool)**
@@ -23,6 +19,8 @@
 * **[Consensus](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/tree/master/consensus)**
   * [LibraBFT-paper](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/consensus/libra-consensus-state-machine-replication-in-the-libra-blockchain.pdf)
   * [README](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/consensus/README.md)
+  * [Txn_Manager](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/consensus/Txn_manager.md)
+  * [State_Computer](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/consensus/State_Computer.md)
   * [SMR](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/tree/master/consensus/SMR)
     * [block_store](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/consensus/SMR/block_store.md)
     * [SMR](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/consensus/SMR/SMR.md)
