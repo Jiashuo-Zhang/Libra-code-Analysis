@@ -9,9 +9,9 @@
 
 ## 代码实现：
 
-##mempool.rs:
+### mempool.rs:
 
-**组合起来各个模块，包括：各种为快速查找txns实现的的index（索引），sequenc number map等等东西，来实现增删txn，同步，取block等等功能**
+**组合起来各个模块，包括：各种为快速查找txns实现的的index（索引），sequenc number map等等部分，来实现增删txn，同步，取block等等功能**
 
 #### 定义:
 
@@ -19,7 +19,7 @@
 pub struct Mempool {
     // stores metadata of all transactions in mempool (of all states)
     transactions: TransactionStore,
-   //存储所有交易的原始的亚子
+   //存储所有交易的原始的样子
     sequence_number_cache: LruCache<AccountAddress, u64>,
     //记录每个账户的sequence number，用来排序和选择合法交易组成下一区块
     
@@ -55,7 +55,7 @@ pub struct TransactionStore {
 }
 ```
 
-####impl mempool：
+#### impl mempool：
 
 ```rust
 impl Mempool {
@@ -149,7 +149,6 @@ impl Mempool {
         };
         self.sequence_number_cache
             .insert(txn.sender(), sequence_number);
-
         // don't accept old transactions (e.g. seq is less than account's current seq_number)
         if txn.sequence_number() < sequence_number {
             return MempoolAddTransactionStatus::new(
@@ -298,7 +297,7 @@ impl Mempool {
         txn: MempoolTransaction,
         current_sequence_number: u64,
     ) -> MempoolAddTransactionStatus {
-        let (is_update, status) = self.check_for_update(&txn);//这一交易已经在mempool中了，这次交易是为了进行更新。（我们允许对交易的gas price进行更新来加速交易进入区块，这些更新在check_for update函数中完成
+        let (is_update, status) = self.check_for_update(&txn);//这一交易已经在mempool中了，这次交易是为了进行更新。（我们允许对交易的gas price进行更新来加速交易进入区块，这些更新在check_for update函数中完成）
         if is_update {
             return status;
         }

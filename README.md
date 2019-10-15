@@ -1,10 +1,17 @@
 # Libra-code-Analysis
 
-**这个项目旨在帮助研究者们理解Libra的基础结构和了解Rust语言。我们分别描述了The Libra Blockchain的核心组成部分，并聚焦于他们是如何相互联系，组成一个具有完整功能的系统。我们在现有官方文档的基础上，关注于最为核心的框架，自顶向下地逐步深入，并最终完成代码实现层面的分析。同时，对一些繁琐晦涩的部分，我们只关心他们的作用与实现方法，而不深究其具体实现。我们希望这个项目能为希望了解Libra底层实现的研究者们提供帮助，同时填补Libra 代码分析这一领域的空白。**
+**这个项目旨在帮助研究者们理解Libra的基础框架和了解Rust语言。我们分别描述了The Libra Blockchain的核心组成部分，并聚焦于他们是如何相互联系，组成一个具有完整功能的系统。我们在现有官方文档和注释的基础上，关注于最为核心的框架，自顶向下地逐步深入，并最终完成代码实现层面的分析。同时，对一些繁琐晦涩的部分，我们只关心他们的作用与实现方法，而不深究其具体实现。我们希望这个项目能为希望了解Libra底层实现的研究者们提供一部分帮助，同时填补Libra 中文代码分析这一领域的空白。**
+
+## 背景知识：
+
+**我们的分析建立在了解区块链基础概念（如BFT共识、智能合约、联盟链等）与Rust简单语法的基础上，另外，我们强烈推荐阅读一部分Libra官方文档——[Life-of-a-transaction](https://developers.libra.org/docs/life-of-a-transaction)，这可以帮助阅读者快速了解Libra的各个部分的大致功能以及互相之间的联系，后续的分析以这一文档为主线，逐步深入。**
 
 ## 目录：
 
+<<<<<<< HEAD
 * **Overview**
+=======
+>>>>>>> 353e25a5b71499ad76d7cde5d5f43fcbfe89c61a
 * **[AC](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/AC/AC.md)**
 * **[VM_validator](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/VM_validator/VM_validator.md)**
 * **[Mempool](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/tree/master/mempool)**
@@ -49,6 +56,10 @@
   * [README](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/client/README.md)
   * [client_proxy](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/client/client_proxy.md)
   * [grpc_client](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/client/grpc_client.md)
+
+## 说明：
+
+**由于精力与水平有限，整个项目还有很多待完成的工作，我们随时欢迎新的贡献者的加入，共同为Libra的中文代码分析作出贡献。同时，阅读过程中如果发现错误，欢迎联系我们勘误。**
 
 ## 参考资料：
 

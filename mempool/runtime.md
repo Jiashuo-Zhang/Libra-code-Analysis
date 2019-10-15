@@ -1,8 +1,12 @@
 # runtime
 
-## 功能：bundle of shared mempool and gRPC service
+## 功能：
 
-## 代码实现：对各个部分进行了设置并register了服务等
+bundle of shared mempool and gRPC service
+
+## 代码实现：
+
+对各个部分进行了初始化，以及起了服务。这之后就mempool就可以正常运行了。
 
 ```rust
 impl MempoolRuntime {
@@ -30,7 +34,7 @@ impl MempoolRuntime {
             .bind(
                 config.mempool.address.clone(),
                 config.mempool.mempool_service_port,
-            )
+            )//起一个服务
             .build()
             .expect("[mempool] unable to create grpc server");
 

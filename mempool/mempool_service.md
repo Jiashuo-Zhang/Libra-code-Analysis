@@ -2,11 +2,14 @@
 
 ## 功能：
 
-对外提供各种gRPC服务
+* 对外提供各种gRPC服务
+* 从这一部分，可以看到mempool对外提供的所有服务，这些服务大都利用在其他.rs文件中定义的函数。
 
 ## 代码：
 
-#### add_transaction_with_validation :收到其他的validator发来的交易，验证数字签名之后，向mempool内加入交易
+#### add_transaction_with_validation :
+
+**收到其他的validator发来的交易，验证数字签名之后，向mempool内加入交易**
 
 ```rust
 fn add_transaction_with_validation(
@@ -34,7 +37,7 @@ fn add_transaction_with_validation(
                 let insertion_result = self
                     .core_mempool
                     .lock()
-                    .expect("[add txn] acquire mempool lock")//获得锁
+                    .expect("[add txn] acquire mempool lock")//获得锁，准备将交易加入
                     .add_txn(
                         transaction,
                         req.max_gas_cost,
@@ -49,11 +52,13 @@ fn add_transaction_with_validation(
                 ctx.spawn(sink.success(response).map_err(default_reply_error_logger))
             }
         }
-        SVC_COUNTERS.resp(&ctx, success);
+        SVC_COUNTERS.resp(&ctx, success);//response
     }
 ```
 
-#### get_block：返回获取一个block作为下一个待达成共识的block
+#### get_block：
+
+**返回获取一个block作为下一个待达成共识的block，在当前validator变成了proposer时会通过这个函数进行propose**
 
 ```rust
 fn get_block(
@@ -94,7 +99,9 @@ fn get_block(
 
 ```
 
-#### commit_transactions：应该是确认了交易被加入到storage之后删除pool里面的对应交易
+#### commit_transactions：
+
+**确认了交易被加入到storage之后删除mempool里面的对应交易**
 
 ```rust
  fn commit_transactions(
@@ -129,7 +136,9 @@ fn get_block(
     }
 ```
 
-#### health_check
+#### health_check：
+
+检查mempool当前的状态
 
 ```rust
  fn health_check(
