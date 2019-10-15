@@ -4,7 +4,7 @@
 
 ## 目录：
 
-* **[Overview](https://developers.libra.org/docs/life-of-a-transaction)**
+* **Overview**
 * **[AC](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/AC/AC.md)**
 * **[VM_validator](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/VM_validator/VM_validator.md)**
 * **[Mempool](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/tree/master/mempool)**

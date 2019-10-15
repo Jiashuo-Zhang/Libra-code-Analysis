@@ -1,4 +1,4 @@
-# EXecution
+# Execution
 
 ###The execution component provides two primary APIs —— execute_block and commit_block
 
