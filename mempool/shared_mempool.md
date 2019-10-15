@@ -8,7 +8,10 @@
     * 管理peers
   * 怎么share？
     * 如何share？
-    * 如何保持正确性？
+      * 定时向peers发出事件（ outbound）
+      * 异步地处理peers发来的事件（inbound）
+    * 如何保持liveness？: garbage collection
+    * 如何保证正确性？：所有共享数据结构的操作都加锁
 
 ## 代码实现：
 

@@ -18,8 +18,9 @@
   * [runtime](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/mempool/runtime.md)
 * **[Consensus](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/tree/master/consensus)**
   * [LibraBFT-paper](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/consensus/libra-consensus-state-machine-replication-in-the-libra-blockchain.pdf)
+  * [README](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/consensus/README.md)
   * [SMR](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/tree/master/consensus/SMR)
-    * [block_store](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/consensus/SMR/EventProcessor.md)
+    * [block_store](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/consensus/SMR/block_store.md)
     * [SMR](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/consensus/SMR/SMR.md)
     * [EventProcessor](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/consensus/SMR/EventProcessor.md)
     * [Sync_nanager](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/consensus/SMR/sync_manager.md)

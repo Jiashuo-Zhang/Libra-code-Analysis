@@ -11,7 +11,9 @@
 
 ### mempool.rs:
 
-**组合起来各个模块，包括：各种为快速查找txns实现的的index（索引），sequenc number map等等部分，来实现增删txn，同步，取block等等功能**
+**组合起来各个模块，包括：各种为快速查找txns实现的的index（索引），sequenc number map等等部分，来实现增删txn，同步，取block等等功能。**
+
+**注：这一部分是mempool中最底层的部分，代码逻辑比较琐碎，如果阅读起来有困难可以只大致了解提供了什么API，直接看后面的更上层的部分。**
 
 #### 定义:
 

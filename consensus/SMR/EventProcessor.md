@@ -86,7 +86,7 @@ pub struct EventProcessor<T, P> {
         {
             Some(pi) => pi,
             None => {
-                return; //self不是合法的proposer，之久return
+                return; //self不是合法的proposer，直接return
             }
         };
        
@@ -407,7 +407,7 @@ pub struct EventProcessor<T, P> {
 
 ```
 
-#### process_winning_proposal： 其实没太看懂，似乎是说从一系列proposal中选出了一个胜出的proposal，如果我们要投票就给他投票。这似乎说了一个round会有多个proposal，我们都会记录下来，并选出一个胜出的把它加入到block store之后尝试给他投票
+#### process_winning_proposal： 从一系列proposal中选出了一个胜出的proposal，如果我们要投票就给他投票。这似乎说了一个round会有多个proposal，我们都会记录下来，并选出一个胜出的把它加入到block store之后尝试给他投票
 
 ```rust
  /// This function processes a proposal that was chosen as a representative of its round:
@@ -566,7 +566,7 @@ pub struct EventProcessor<T, P> {
 
 ```
 
-#### process_vote：接受并处理vote事件，特别是在自己是下个round的proposer的时候
+#### process_vote：接受并处理vote事件（在自己是当前round的proposer的时候）
 
 ```rust
  /// Upon new vote:
@@ -584,7 +584,7 @@ pub struct EventProcessor<T, P> {
             .is_valid_proposer(self.author, next_round)
             .is_none()
         {
-            debug!(//自己不是下个round的valid proposer，直接结束
+            debug!(//自己不是当前round的valid proposer，直接结束
                 "Received {}, but I am not a valid proposer for round {}, ignore.",
                 vote, next_round
             );
@@ -635,7 +635,7 @@ pub struct EventProcessor<T, P> {
                 // Notify the Pacemaker about the new QC round.
                 self.pacemaker
                     .process_certificates(vote.round(), None)
-                    .await;////告诉pace maker，新的QC产生了
+                    .await;////告诉pacemaker，新的QC产生了
             }
             // nothing interesting with votes arriving for the QC that has been formed
             _ => {}//QC早就集齐2f+1了，这个vote没啥实质作用
@@ -646,7 +646,7 @@ pub struct EventProcessor<T, P> {
 #### process_commit：
 
 ```rust
-//英文注释很全面，值得注意的是prune the tree的操作真的很巧妙，他让同步变得简单，并且去除了过去的不再起作用的记录，是一个非常精妙的操作
+//英文注释很全面，值得注意的是prune the tree的操作真的很巧妙，他让同步变得简单，并且去除了过去的不再起作用的记录，起到了garbage collection的功能。
 
 /// Upon new commit:
     /// 1. Notify state computer with the finality proof.
