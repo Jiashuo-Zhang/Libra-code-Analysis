@@ -58,6 +58,10 @@
   * [client_proxy](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/client/client_proxy.md)
   * [grpc_client](https://github.com/Jiashuo-Zhang/Libra-code-Analysis/blob/master/client/grpc_client.md)
 
+## 当前进度：
+
+**目前AC，VM_validator，Mempool，Consensus，Execution，Storage部分内容较为完善，Language，Network，Client内容还有所缺失，由于精力与水平有限，未来我们将优先对Move语言相关部分做一些简单的分析。**
+
 ## 说明：
 
 **由于精力与水平有限，整个项目还有很多待完成的工作，我们随时欢迎新的贡献者的加入，共同为Libra的中文代码分析作出贡献。同时，阅读过程中如果发现错误，欢迎联系我们勘误。**
