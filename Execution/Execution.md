@@ -1,6 +1,13 @@
 # Execution
 
-###The execution component provides two primary APIs —— execute_block and commit_block
+**Execution是Libra中的一个重要模块，负责接收有一定顺序的交易，调用MoveVM计算每一个交易的结果，并把结果应用到当前的state里面一部分主要提供了两个API，分别是：**
+
+* execute block
+* commit block
+
+这两部分的顶层实现我们在**executionclients&service.md**中进行了展示。
+
+
 
 ## 目录：
 

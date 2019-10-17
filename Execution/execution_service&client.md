@@ -1,8 +1,14 @@
-### 这一部分有点偷懒，之后会补上
+# Execution:
 
+## 功能：
 
+这一部分主要是实现了execution模块的主要服务，并且实现了调用这些服务的客户端。
 
-## execution_service
+## 代码实现：
+
+这一部分总体逻辑很简单，主要的工作是加壳，主要是处理了接受request，把请求传送给相应的函数，之后的得到结果，返回给客户端。值得注意的是，实际的execute的逻辑并不是在这里实现的，而是在executor中完成的。这还是体现了libra代码的封装的特点。
+
+### execution_service
 
 ```rust
 pub struct ExecutionService {
@@ -106,85 +112,10 @@ impl ExecutionService {
         }
     }
 }
-  fn execute_block(
-        &mut self,
-        ctx: grpcio::RpcContext,
-        request: execution_proto::proto::execution::ExecuteBlockRequest,
-        sink: grpcio::UnarySink<execution_proto::proto::execution::ExecuteBlockResponse>,
-    ) {
-        match ExecuteBlockRequest::from_proto(request) {
-            Ok(req) => {
-                let fut = process_response(
-                    self.executor.execute_block(
-                        req.transactions,
-                        req.parent_block_id,
-                        req.block_id,
-                    ),
-                    sink,
-                )
-                .boxed()
-                .unit_error()
-                .compat();
-                ctx.spawn(fut);
-            }
-            Err(err) => {
-                let fut = process_conversion_error(err, sink);
-                ctx.spawn(fut);
-            }
-        }
-    }
-
-    fn commit_block(
-        &mut self,
-        ctx: grpcio::RpcContext,
-        request: execution_proto::proto::execution::CommitBlockRequest,
-        sink: grpcio::UnarySink<execution_proto::proto::execution::CommitBlockResponse>,
-    ) {
-        match CommitBlockRequest::from_proto(request) {
-            Ok(req) => {
-                let fut =
-                    process_response(self.executor.commit_block(req.ledger_info_with_sigs), sink)
-                        .boxed()
-                        .unit_error()
-                        .compat();
-                ctx.spawn(fut);
-            }
-            Err(err) => {
-                let fut = process_conversion_error(err, sink);
-                ctx.spawn(fut);
-            }
-        }
-    }
-
-    fn execute_chunk(
-        &mut self,
-        ctx: grpcio::RpcContext,
-        request: execution_proto::proto::execution::ExecuteChunkRequest,
-        sink: grpcio::UnarySink<execution_proto::proto::execution::ExecuteChunkResponse>,
-    ) {
-        match ExecuteChunkRequest::from_proto(request) {
-            Ok(req) => {
-                let fut = process_response(
-                    self.executor
-                        .execute_chunk(req.txn_list_with_proof, req.ledger_info_with_sigs),
-                    sink,
-                )
-                .boxed()
-                .unit_error()
-                .compat();
-                ctx.spawn(fut);
-            }
-            Err(err) => {
-                let fut = process_conversion_error(err, sink);
-                ctx.spawn(fut);
-            }
-        }
-    }
-}
 
  ```
 
- #### 处理回应的RPC：
+#### 处理response的RPC：
 
 ```rust
 async fn process_response<T>(
@@ -216,9 +147,7 @@ async fn process_response<T>(
 
 ```
 
-
-
-## client
+### client
 
 ```rust
 pub struct ExecutionClient {
